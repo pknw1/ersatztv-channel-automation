@@ -1,0 +1,30 @@
+
+for ID in SELECT id from PlexMovie
+    Title = SELECT Title from MovieMetadata WHERE MovieId == ID
+    CollectionName = "${Title}"
+    CollectionExists = SELECT Name FROM Collection WHERE Name == "${Title}"
+    FillerExists = SELECT Name FROM FillerPreset WHERE Name == "${Title}"
+    ChannelExists = SELECT Name FROM Channel WHERE Name == "${Title}"
+
+    if [[ -z ${CollectionExists} ]]
+    then
+        nextID = getNextId()
+        INSERT INTO "Collection" ("Id","Name","UseCustomPlaybackOrder") VALUES (3,'${Title}',0);
+        INSERT INTO "CollectionItem" ("CollectionId","MediaItemId","CustomIndex") VALUES (3,46,NULL);
+    fi
+
+
+    if [[ -z ${FillerExists} ]]
+    then
+        nextID = getNextId()
+        INSERT INTO "FillerPreset" ("Id","Name","FillerKind","FillerMode","Duration","Count","PadToNearestMinute","CollectionType","CollectionId","MediaItemId","MultiCollectionId","SmartCollectionId","AllowWatermarks") VALUES (3,'Time Out',5,0,NULL,NULL,NULL,0,3,NULL,NULL,NULL,0);
+    fi
+
+
+    if [[ -z ${ChannelExists} ]]
+    then
+        nextID = getNextId()
+        INSERT INTO "Channel" ("Id","FFmpegProfileId","FallbackFillerId","Name","Number","PreferredAudioLanguageCode","StreamingMode","UniqueId","WatermarkId","Categories","Group","PreferredSubtitleLanguageCode","SubtitleMode","MusicVideoCreditsMode","PreferredAudioTitle","MusicVideoCreditsTemplate") VALUES (4,1,3,'Time Out','5','',1,'2147bb9c-232f-4f94-8937-362b902d82b5',NULL,NULL,'ErsatzTV','',0,0,NULL,NULL);
+    fi
+
+
