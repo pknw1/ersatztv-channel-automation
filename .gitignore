@@ -1,0 +1,13 @@
+*out
+*logs
+*actions
+*notifications
+*tools
+plugins
+user_trunk.yaml
+user.yaml
+.DS_Store
+testdata/**
+!testdata/.keep
+sql-scratch/**
+!sql-scratch/.keep
