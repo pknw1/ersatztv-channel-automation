@@ -5,6 +5,6 @@ FROM python:3.10
 RUN mkdir /app
 WORKDIR /app
 
-ADD ../interation0.py /app/channel-automator-0.1.py
+ADD ../interation1.py /app/channel-automator-0.1.py
 
 CMD ["/usr/bin/python3", "/app/channel-automator-0.1.py"]

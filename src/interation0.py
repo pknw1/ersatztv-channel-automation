@@ -28,16 +28,28 @@ for movie_data in plexmovies:
     plot_raw = cursor.execute("SELECT Plot FROM MovieMetadata WHERE MovieId = "+movie_id).fetchall()[0]
     year_raw = cursor.execute("SELECT year FROM MovieMetadata WHERE MovieId = "+movie_id).fetchall()[0]
     title_year = title_raw[0]+" ("+str(year_raw[0])+")"
+    title_escaped = title_year.replace("'", "")
+    title_year = title_escaped 
+    
+    print("processing movie_id: "+movie_id+" - "+title_year)
+
+
+    exists = cursor.execute("SELECT id FROM 'Collection' WHERE NAME = '"+title_year+"").fetchall()[0]
+'''
+    try:
+      exists = cursor.execute("SELECT id FROM 'Collection' WHERE NAME = '"+title_year+"").fetchall()[0]
+      print(exists)
+    except:
+      print("new")
+       '''
+       
     '''
     print(title_raw[0])
     print(year_raw[0])
     print(plot_raw[0])
     '''
 
-    print(title_year)
-    title_escaped = title_year.replace("'", "")
-    title_year = title_escaped 
-    print("processing movie_id: "+movie_id+" - "+title_year)
+    '''debug out
 
     # Create an empty collection using the movie title and year
     collection_insert = cursor.execute("INSERT INTO Collection ('Name', 'UseCustomPlaybackOrder') VALUES ('"+title_year+"', 0)")
@@ -68,3 +80,4 @@ for movie_data in plexmovies:
     channel_insert = cursor.execute("INSERT INTO Channel ('FFmpegProfileId','FallbackFillerId','Name','Number','PreferredAudioLanguageCode','StreamingMode','UniqueId','WatermarkId','Categories','Group','PreferredSubtitleLanguageCode','SubtitleMode','MusicVideoCreditsMode','PreferredAudioTitle','MusicVideoCreditsTemplate') VALUES  (1,'"+next+"','"+title_year+"','"+next_channel+"',NULL,1,'"+random_uuid+"',1,NULL,'Movies','',0,0,NULL,NULL);")
         
     connection.commit()
+'''
