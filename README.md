@@ -74,3 +74,6 @@ start of developing a channel autopopulator for ErsatzTV [https://github.com/Ers
         Rel(AdminUser, Automation, "Uses")
         BiRel(Automation, DB, "Data")
 ```
+
+
+![](https://www.pknw1.co.uk/assets/images/github.png)
