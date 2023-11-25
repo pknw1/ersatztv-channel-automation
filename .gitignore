@@ -11,3 +11,5 @@ testdata/**
 !testdata/.keep
 sql-scratch/**
 !sql-scratch/.keep
+.venv/
+__pycache__/
