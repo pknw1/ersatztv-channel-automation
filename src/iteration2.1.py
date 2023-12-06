@@ -82,7 +82,8 @@ def create_channel(preset_id, EpisodeLabel, ShowTitle):
         random_uuid = str(uuid.uuid4())
         channel_seq_id = cursor.execute("select seq from sqlite_sequence WHERE name = 'Channel'").fetchall()[0]
         next_channel = str(channel_seq_id[0]+1)
-        channel_insert = cursor.execute("INSERT INTO Channel ('FFmpegProfileId','FallbackFillerId','Name','Number','PreferredAudioLanguageCode','StreamingMode','UniqueId','WatermarkId','Categories','Group','PreferredSubtitleLanguageCode','SubtitleMode','MusicVideoCreditsMode','PreferredAudioTitle','MusicVideoCreditsTemplate') VALUES  (1,'"+preset_id+"','"+EpisodeLabel+"','"+next_channel+"',NULL,1,'"+random_uuid+"',1,NULL,'"+ShowTitle+"','',0,0,NULL,NULL);")
+        ShowTitleGroup = ("(TV Show) - "+ShowTitle)
+        channel_insert = cursor.execute("INSERT INTO Channel ('FFmpegProfileId','FallbackFillerId','Name','Number','PreferredAudioLanguageCode','StreamingMode','UniqueId','WatermarkId','Categories','Group','PreferredSubtitleLanguageCode','SubtitleMode','MusicVideoCreditsMode','PreferredAudioTitle','MusicVideoCreditsTemplate') VALUES  (1,'"+preset_id+"','"+EpisodeLabel+"','"+next_channel+"',NULL,1,'"+random_uuid+"',1,NULL,'"+ShowTitleGroup+"','',0,0,NULL,NULL);")
     connection.commit()
 
 
