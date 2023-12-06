@@ -5,6 +5,6 @@ FROM python:3.10
 RUN mkdir /app
 WORKDIR /app
 
-COPY "${PWD}":/../iteration1.py /app/channel-automator-0.1.py
+COPY "${PWD}":/../iteration2.py /app/channel-automator-0.2.py
 
-CMD ["/usr/bin/python3", "/app/channel-automator-0.1.py"]
+CMD ["/usr/bin/python3", "/app/channel-automator-0.2.py"]
