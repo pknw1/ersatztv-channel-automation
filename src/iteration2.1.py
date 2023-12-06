@@ -43,6 +43,7 @@ def get_episode_metadata(EpisodeId):
 def create_collection(EpisodeLabel):
     try:
       exists = cursor.execute("SELECT id FROM 'Collection' WHERE NAME = '"+EpisodeLabel+"'").fetchall()[0]
+      print("Collection Exists")
     except:
       cursor.execute("INSERT INTO Collection ('Name', 'UseCustomPlaybackOrder') VALUES ('"+EpisodeLabel+"', 0)")
       connection.commit()
@@ -53,7 +54,7 @@ def create_collection(EpisodeLabel):
 def create_collection_item(collection_id, MediaItemId):
     try:
         exists = cursor.execute("Select CollectionId from CollectionItem WHERE MediaItemId = "+str(MediaItemId)).fetchall()
-        #print("exists: " +str(exists[0]))
+        print("exists: " +str(exists[0]))
         #print("collectitem exists")
     except Exception as e:
         exists = cursor.execute("INSERT INTO 'CollectionItem' ('CollectionId','MediaItemId','CustomIndex') VALUES ("+collection_id+","+MediaItemId+",NULL);")    
@@ -64,13 +65,13 @@ def create_collection_item(collection_id, MediaItemId):
 def create_preset(EpisodeLabel, collection_id):
     try:
         exists = cursor.execute("Select Id from FillerPreset WHERE CollectionId = "+collection_id).fetchall()
-        #print("Filler Preset Exists: " +str(exists[0][0]))
+        print("Filler Preset Exists: " +str(exists[0][0]))
     except:
         filler_insert = cursor.execute("INSERT INTO FillerPreset ('Name','FillerKind','FillerMode','Duration','Count','PadToNearestMinute','CollectionType','CollectionId','MediaItemId','MultiCollectionId','SmartCollectionId','AllowWatermarks') VALUES ('"+EpisodeLabel+"',5,0,NULL,NULL,NULL,0,"+collection_id+",NULL,NULL,NULL,1);")
         connection.commit()
 
     exists = cursor.execute("Select Id from FillerPreset WHERE CollectionId = "+collection_id).fetchall()
-    #print(exists[0][0])
+    print(exists[0][0])
     return exists[0][0]
 
 def create_channel(preset_id, EpisodeLabel, ShowTitle):
